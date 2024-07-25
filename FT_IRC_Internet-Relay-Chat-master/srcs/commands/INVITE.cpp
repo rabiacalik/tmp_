@@ -1,0 +1,28 @@
+#include "../../includes/Server.hpp"
+
+//İstemcinin bir kanala kullanıcı davet etmesi için kullanılır
+void Server::Invite(std::vector<std::string>& params, Client& cli)
+{
+    //yetkili mi
+    passChecker(cli);
+    //Belirtilen kanal mevcut mu
+    if (isChannelExist(params[1]) == 0) {
+        Utils::writeMessage(cli._cliFd, ERR_NOSUCHCHANNEL(params[1], params[0]));
+        return ;
+    }
+    size_t flag = 0; //Kullanıcı bulun du mu
+    for (cliIt it = _clients.begin(); it != _clients.end(); ++it) {
+        if (it->_nick == params[0]) //davet edilecek kullanıcı ile listedeki nickler karşılaştırılır
+        {
+            flag = 1;
+            Channel chan = getChannel(params[1]); //ilgili kanal alınır
+            if (cli._nick != chan._opNick) {
+                Utils::writeMessage(cli._cliFd, ERR_CHANOPRIVSNEEDED(cli._nick, params[1]));
+                return ;
+            }
+            Utils::writeMessage(it->_cliFd, RPL_INVITE(cli._nick, cli._ipAddr, chan._name, params[1]));
+        }
+    }
+    if (flag == 0)
+        Utils::writeMessage(cli._cliFd, ERR_NOSUCHNICK);
+}
