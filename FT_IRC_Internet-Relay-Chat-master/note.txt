@@ -1,2 +1,20 @@
-- fare modellerine bak
-- 
+* BOT - mesaj gönderiyor
+* CAP - clientin yeteneklerini belirliyor nc-ls-bot
+* INVITE - kanal operatorunun kanala kullanici davet etmesini sağlar
+* JOİN - kullanicin kanala girmesini. kanal yoksa olusturup girmesini sağlar
+* KICK - kullaniciyi kanaldan çikarir
+
+* MODE - kanalin modunu özelliklerini değiştirir
+* NICK - kullanici nick name değiştirilir
+* NOTICE - kullaniciya mesaj gonderir
+* PART - kullanicinin kanaldan yada kanallardan çikmasini sağlar
+* PASS - kullanicin servere giriş yapabilmesi için şifre kontrolu yapilir
+
+- PRIVMSG
+- QUIT
+- TOPİC
+- USER
+- WHO
+
+- hata mesajlarina daha detayli bakilacak. hata kodalrina da !!
+- passChecker i neden tum komutlarda tekrar tekrar kontrol ediyoruz !!! bir sefer kontrol edilemez mi sonuçda değiştirilen bir şey değil !!!!

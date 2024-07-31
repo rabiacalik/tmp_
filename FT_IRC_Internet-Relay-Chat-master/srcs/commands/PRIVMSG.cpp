@@ -1,4 +1,4 @@
-#include "../../includes/Server.hpp"
+ #include "../../includes/Server.hpp"
 
 void Server::toChannel(std::vector<std::string>& params, Client& cli)
 {
