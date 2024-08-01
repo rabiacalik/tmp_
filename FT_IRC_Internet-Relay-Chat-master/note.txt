@@ -10,9 +10,15 @@
 * PART - kullanicinin kanaldan yada kanallardan çikmasini sağlar
 * PASS - kullanicin servere giriş yapabilmesi için şifre kontrolu yapilir
 
+<<<<<<< HEAD
 * PRIVMSG - kullanıcıya yada kanala mesaj atar
 * QUIT - Kullanıcının sunucudan çıkması sağlanır
 * TOPİC - kanalın başlığı belirlenir yada güncellenir
+=======
+- PRIVMSG
+- QUIT
+- TOPİC
+>>>>>>> 6c660cb8f14e021b1dd118fa0e0f2be671ce736e
 - USER
 - WHO
 
