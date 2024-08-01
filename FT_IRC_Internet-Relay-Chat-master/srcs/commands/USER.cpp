@@ -1,5 +1,11 @@
 #include "../../includes/Server.hpp"
-
+/*
+kullanıcının kimlik bilgilerini ayarlamak için kullanılır. 
+USER <username> <hostname> <servername> <realname>
+USER johndoe localhost irc.example.com "John Doe"
+:server 302 johndoe 127.0.0.1 :John Doe
+denenecek !!!!
+*/
 void Server::User(std::vector<std::string>& params, Client& cli)
 {
     if (cli._isCap == NC)
@@ -9,6 +15,7 @@ void Server::User(std::vector<std::string>& params, Client& cli)
         Utils::writeMessage(cli._cliFd, ERR_NEEDMOREPARAMS(cli._nick, params[0]));
         Utils::writeMessage(cli._cliFd, RPL_USERERROR(params[0]));
     }
+    //zaten kayıt olmamışsa
     else if (!cli._user.empty())
         Utils::writeMessage(cli._cliFd, ERR_ALREADYREGISTRED);
     else
@@ -16,6 +23,7 @@ void Server::User(std::vector<std::string>& params, Client& cli)
         cli._user = params[0];
         cli._host = params[1];
         cli._ip = params[2];
+        //gerçek isim ayralanır
         if (params[3][0] != ':')
             cli._realName = params[3];
         else

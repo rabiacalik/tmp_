@@ -23,13 +23,13 @@ class Server
     private:
 
         int _serverFd;
-        int _botFd;
+        int _botFd;  //Botun sunucuya bağlandığında kullanılan dosya tanıtıcısı. Bu tanıtıcı, sunucuya mesaj göndermek ve sunucudan mesaj almak için kullanılır.
         size_t _port;
         std::string _password;
         char _buffer[1024];
         std::map<std::string, Commands> _commands;
         std::vector<Channel> _channels;
-        std::vector<Client> _clients;
+        std::vector<Client> _clients;  //bu nerenin !!!
         
         fd_set _readFds;
         fd_set _writeFds;

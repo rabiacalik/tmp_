@@ -1,5 +1,14 @@
 #include "../../includes/Server.hpp"
+/*
+kanalın başlığını belirlemek veya değiştirmek için kullanılır.
+bunları dene !!!
+/topic #general
+/topic #general :
+/topic #general :topic
 
+*/
+
+//parametrede girilen topic i birleştirip stringi dönüyor
 std::string getTopic(std::vector<std::string>& params)
 {
     std::string ret = "";
@@ -26,6 +35,7 @@ void Server::Topic(std::vector<std::string>& params, Client& cli)
     for (chanIt it = _channels.begin(); it != _channels.end(); ++it) {
         if (params[0] == it->_name) {
             flag = 1;
+            //sadece kanal adı verilmişse yada : konup bırakılmışsa
             if (params.size() == 1 || params[1] == ":") {
                 Utils::writeMessage(cli._cliFd, RPL_NOTOPIC(it->_opNick, params[0]));
                 return ;
@@ -35,14 +45,17 @@ void Server::Topic(std::vector<std::string>& params, Client& cli)
                     Utils::writeMessage(cli._cliFd, ERR_CHANOPRIVSNEEDED(cli._nick, params[0]));
                     return ;
                 }
+
                 it->_topic = getTopic(params);
                 std::string top = it->_topic;
-                top.erase(0, 1);
+                top.erase(0, 1); // : kaldırır
+                //tum kullanıcılara yeni başlığı iletir
                 Utils::writeAllMessage(it->getFds(), RPL_TOPIC(cli._nick, cli._ipAddr, params[0], top));
                 return ;
             }
         }
     }
+    //eğer kanal bulunamazsa
     if (flag == 0)
         Utils::writeMessage(cli._cliFd, ERR_NOSUCHCHANNEL(cli._nick, params[0]));
 }

@@ -44,12 +44,10 @@ void Server::passChecker(Client& client)
     }
 }
 
-//(:) yı params tan çıkarır ve sıralar
+//girilen mesajın başındaki (:) siler. kelimeleri boşluk ile ayırip kaydeder
 void Server::getAfterColon(std::vector<std::string>& params)
 {
-    //genellikle (:) yada gereksiz bir karakter temizlenir !!!
     params[1].erase(0, 1);
-    //parametreleri sıralar
     for (size_t i = 2; i < params.size(); ++i)
     {
         params[1] += " " + params[i];
@@ -80,7 +78,7 @@ int Server::isChannelExist(std::string const& channelName)
     return 0;
 }
 
-//İstemcinin belirtilen kanalda olup olmadığına bakar
+//Kullanıcının belirtilen kanalda olup olmadığına bakılır
 int Server::clientIsInThere(Client& client, std::string const& chanName)
 {
     for (chanIt it = _channels.begin(); it != _channels.end(); ++it)
@@ -89,7 +87,6 @@ int Server::clientIsInThere(Client& client, std::string const& chanName)
         {
             for (cliIt it2 = it->_channelClients.begin(); it2 != it->_channelClients.end(); ++it2)
             {
-                //neden nick kontrolü yapılıyor!!!!
                 if (it2->_nick == client._nick)
                     return (1);
             }

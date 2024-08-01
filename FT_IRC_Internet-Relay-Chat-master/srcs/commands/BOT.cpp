@@ -1,5 +1,12 @@
 #include "../../includes/Server.hpp"
 
+/*
+Botlar irc sunucusuna bir istemci gibi bsğlanır
+Kullanıcılar Botlara /BOT komutu ile bağlanabilir. Botun belirli görevlari yerine getirmesini sağlayabilir
+Girilen Parametreler command dan sonra yer alan şeyler
+*/
+// /BOT mesaj_parametreleri (Dene!!)
+
 void Server::Bot(std::vector<std::string>& params, Client& cli)
 {
     //Kullanıcının kimlik doğrulaması yapılmışmı
@@ -10,7 +17,7 @@ void Server::Bot(std::vector<std::string>& params, Client& cli)
         Utils::writeMessage(cli._cliFd, "Set your nickname first\r\n");
         return ;
     }
-    //Parametre kontrolü
+    //Parametre kontrolü 
     if (params[0] == "") {
         Utils::writeMessage(cli._cliFd, ERR_NEEDMOREPARAMS(cli._nick, "BOT"));
         return ;

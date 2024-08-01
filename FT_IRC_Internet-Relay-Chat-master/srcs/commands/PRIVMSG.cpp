@@ -1,5 +1,13 @@
-#include "../../includes/Server.hpp"
+ #include "../../includes/Server.hpp"
 
+/*
+Belirli bir kullanıcıya yada kanala mesaj iletir (sohbet için kullanılır)
+NOTICE mesajları, istemciler tarafından "bilgilendirme" mesajları olarak ele alınır. Bu mesajlar, genellikle bilgi vermek için kullanılır ve kullanıcının yanıt vermesi gerekmez.
+PRIVMSG komutu, kullanıcılar arasında gerçek zamanlı sohbet veya diyalog kurmak için kullanılır.
+NOTICE komutu, önemli duyurular, uyarılar veya bilgi paylaşımı yapmak için kullanılır.
+*/
+
+//Kanala - Kullanıcı belirttiği kanaldaki kullanıcılara mesaj atabilir
 void Server::toChannel(std::vector<std::string>& params, Client& cli)
 {
     if (isChannelExist(params[0]) == 0) {
@@ -20,6 +28,7 @@ void Server::toChannel(std::vector<std::string>& params, Client& cli)
     }
 }
 
+// kullanıcıya mesaj atıyor . kendi kendine mesaj atma durumu kontrol edilmemiş !!!!
 void Server::toClient(std::vector<std::string>& params, Client& cli)
 {
     int flag = 0;

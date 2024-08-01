@@ -1,5 +1,7 @@
 #include "../includes/Utils.hpp"
-
+/*
+socket = mesajın gönderileceği soket veya dosya tanımlayıcısı
+*/
 void Utils::writeMessage(int socket, std::string const& message)
 {
     if ((write(socket, message.c_str(), message.length())) < 0)
